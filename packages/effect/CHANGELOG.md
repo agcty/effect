@@ -1,5 +1,13 @@
 # effect
 
+## 4.0.0-beta.99
+
+### Patch Changes
+
+- [#6371](https://github.com/Effect-TS/effect/pull/6371) [`7543afe`](https://github.com/Effect-TS/effect/commit/7543afea6f4d97d1f1ad876224323838a48daadd) Thanks @polRk! - Tool: preserve the tool kind when cloning provider-defined and dynamic tools.
+
+  `Tool.addDependency`, `setParameters`, `setSuccess`, `setFailure`, `annotate`, and `annotateMerge` previously rebuilt the tool as a user-defined tool, which flipped `Tool.isProviderDefined` to `false`, corrupted the provider `id` (e.g. `anthropic.memory_20250818`), and crashed `Tool.getStrictMode`. These operations now clone the tool while preserving its prototype, `id`, and kind. Provider-defined tools also now carry an empty annotations context so `Tool.getStrictMode`/`annotate` work on them. Closes [#2615](https://github.com/Effect-TS/effect/issues/2615).
+
 ## 4.0.0-beta.98
 
 ### Patch Changes

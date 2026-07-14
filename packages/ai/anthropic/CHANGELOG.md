@@ -1,5 +1,19 @@
 # @effect/ai-anthropic
 
+## 4.0.0-beta.99
+
+### Patch Changes
+
+- [#6371](https://github.com/Effect-TS/effect/pull/6371) [`7543afe`](https://github.com/Effect-TS/effect/commit/7543afea6f4d97d1f1ad876224323838a48daadd) Thanks @polRk! - Fix client-executed provider tools (Memory, Text Editor, Computer Use, Bash) which were unusable on the wire.
+  - `makeResponse` (and the streaming equivalents) now map a provider `tool_use` wire name (e.g. `"memory"`) back to the tool's custom name (e.g. `"AnthropicMemory"`) that the toolkit is keyed by, instead of raising `ToolNotFoundError`.
+  - `AnthropicTool.MemoryCreateCommand` now includes the required `file_text` field, so a `create` command no longer drops the file body.
+  - Optional parameters on client-executed provider tools now use `Schema.optionalKey` instead of `Schema.optional`, which the Anthropic codec rejected with "Unsupported AST Undefined": `Memory`/`TextEditor` `view_range`, `ComputerUse` `coordinate`, and `Bash` `restart`.
+
+  Closes [#2615](https://github.com/Effect-TS/effect/issues/2615).
+
+- Updated dependencies [[`7543afe`](https://github.com/Effect-TS/effect/commit/7543afea6f4d97d1f1ad876224323838a48daadd)]:
+  - effect@4.0.0-beta.99
+
 ## 4.0.0-beta.98
 
 ### Patch Changes
